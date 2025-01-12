@@ -8,7 +8,8 @@ class HomeComponent extends Component {
     isActive: false,
     isButton: false,
     activeId: '',
-    opponentChoice:'',
+    opponentChoice: '',
+    result: '',
   }
 
   onChange = () => {
@@ -17,19 +18,52 @@ class HomeComponent extends Component {
     })
   }
 
+  playAgain = () => {
+    this.setState({
+      activeId: '',
+      opponentChoice: '',
+      result: '',
+      isButton: false,
+    })
+  }
 
-  
   rockButton = id => {
-    if (id === 'ROCK') {
-      this.setState({
-        isButton: true,
-        activeId: id,
-      })
+    const opponentChoices = ['ROCK', 'PAPER', 'SCISSORS']
+    const opponentChoice =
+      opponentChoices[Math.floor(Math.random() * opponentChoices.length)]
+    let result = ''
+
+    if (id === opponentChoice) {
+      result = 'IT IS DRAW'
+    } else if (
+      (id === 'ROCK' && opponentChoice === 'SCISSORS') ||
+      (id === 'PAPER' && opponentChoice === 'ROCK') ||
+      (id === 'SCISSORS' && opponentChoice === 'PAPER')
+    ) {
+      result = 'YOU WON'
+      this.setState(prevState => ({score: prevState.score + 1}))
+    } else {
+      result = 'YOU LOSE'
+      this.setState(prevState => ({score: prevState.score - 1}))
     }
+
+    this.setState({
+      activeId: id,
+      opponentChoice,
+      result,
+      isButton: true,
+    })
   }
 
   render() {
-    const {score, isActive, isButton, activeId} = this.state
+    const {
+      score,
+      isActive,
+      isButton,
+      activeId,
+      opponentChoice,
+      result,
+    } = this.state
     const {choicesList} = this.props
     return (
       <div className="container">
@@ -63,13 +97,22 @@ class HomeComponent extends Component {
                       choicesList.find(each => each.id === activeId).imageUrl
                     }
                     alt="your choice"
+                    className="image"
                   />
                 </div>
                 <div>
                   <h1>OPPONENT</h1>
-                  <img src={} alt="opponent choice" />
+                  <img
+                    src={
+                      choicesList.find(each => each.id === opponentChoice)
+                        .imageUrl
+                    }
+                    alt="opponent choice"
+                    className="image"
+                  />
                 </div>
-                <button>PLAY AGAIN</button>
+                <p>{result}</p>
+                <button onClick={this.playAgain}>PLAY AGAIN</button>
               </div>
             ) : (
               ''

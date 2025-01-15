@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import './index.css'
+
 import Popup from 'reactjs-popup'
+import {Heading, Image} from './styleComponent'
 
 class HomeComponent extends Component {
   state = {
@@ -67,7 +69,7 @@ class HomeComponent extends Component {
     const {choicesList} = this.props
     return (
       <div className="container">
-        <h1>Rock Paper Scissors</h1>
+        <Heading>Rock Paper Scissors</Heading>
         <div>
           <div>
             <p>Score</p>
@@ -82,7 +84,7 @@ class HomeComponent extends Component {
                   data-testid={`${each.id.toLowerCase()}Button`}
                   onClick={() => this.rockButton(each.id)}
                 >
-                  <img src={each.imageUrl} alt={each.id} className="image" />
+                  <Image src={each.imageUrl} alt={each.id} className="image" />
                 </button>
               </li>
             ))}

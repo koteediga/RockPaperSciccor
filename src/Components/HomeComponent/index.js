@@ -77,18 +77,6 @@ class HomeComponent extends Component {
           </div>
         </div>
         <div>
-          <ul>
-            {choicesList.map(each => (
-              <li key={each.id}>
-                <button
-                  data-testid={`${each.id.toLowerCase()}Button`}
-                  onClick={() => this.rockButton(each.id)}
-                >
-                  <Image src={each.imageUrl} alt={each.id} className="image" />
-                </button>
-              </li>
-            ))}
-          </ul>
           <div>
             {isButton ? (
               <div>
@@ -117,7 +105,18 @@ class HomeComponent extends Component {
                 <button onClick={this.playAgain}>PLAY AGAIN</button>
               </div>
             ) : (
-              ''
+              <ul>
+                {choicesList.map(each => (
+                  <li key={each.id}>
+                    <button
+                      data-testid={`${each.id.toLowerCase()}Button`}
+                      onClick={() => this.rockButton(each.id)}
+                    >
+                      <Image src={each.imageUrl} alt={each.id} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
         </div>

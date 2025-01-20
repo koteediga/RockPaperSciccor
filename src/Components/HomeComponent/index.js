@@ -102,13 +102,17 @@ class HomeComponent extends Component {
                   />
                 </div>
                 <p>{result}</p>
-                <button onClick={this.playAgain}>PLAY AGAIN</button>
+                <button type="button" onClick={this.playAgain}>
+                  {' '}
+                  PLAY AGAIN{' '}
+                </button>
               </div>
             ) : (
               <ul>
                 {choicesList.map(each => (
                   <li key={each.id}>
                     <button
+                      type="button"
                       data-testid={`${each.id.toLowerCase()}Button`}
                       onClick={() => this.rockButton(each.id)}
                     >
@@ -122,7 +126,11 @@ class HomeComponent extends Component {
         </div>
         <div>
           <Popup
-            trigger={<button className="rules-button">RULES</button>} // Button triggers popup
+            trigger={
+              <button type="button" className="rules-button">
+                RULES
+              </button>
+            } // Button triggers popup
             modal
             nested
           >
@@ -134,7 +142,7 @@ class HomeComponent extends Component {
                   alt="rules"
                   className="rules-image"
                 />
-                <button className="close-button" onClick={close}>
+                <button type="button" className="close-button" onClick={close}>
                   Close
                 </button>
               </div>
